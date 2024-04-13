@@ -15,7 +15,7 @@ const styles = {
   description: "text-neutral",
   loginBtn: "flex justify-center items-center",
   buttonContainer:
-    "flex items-center w-full border border-neutral rounded-lg px-4 gap-20 mb-4",
+    "flex items-center w-full border border-neutral rounded-lg px-4 gap-20 my-4",
 };
 
 function Auth() {
@@ -33,7 +33,7 @@ function Auth() {
         Keep track of your finance expenses in a convenient and organized way.
         This application typically allows you to input information abouit your
         expenses nad provides tools for analyzing and categorizing this
-        information to help you better understand your spending limit{" "}
+        information to help you better understand your spending limit.
       </p>
       <div className={styles.buttonContainer} data-onsuccess="onSignIn">
         <span>{GoogleLogo()}</span>
