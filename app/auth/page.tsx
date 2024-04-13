@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
-import { signIn, signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import moneyImage from "../../images/moneyimage.png";
+import logo from "../favicon.ico";
+import Image from "next/image";
+import { GoogleLogo } from "@/components/svg";
 
 const styles = {
   pageContainer:
@@ -11,21 +13,19 @@ const styles = {
   title: "font-bold text-4xl",
   subTitle: "font-semibold text-2xl",
   description: "text-neutral",
+  loginBtn: "flex justify-center items-center",
+  buttonContainer:
+    "flex items-center w-full border border-neutral rounded-lg px-4 gap-20 mb-4",
 };
 
 function Auth() {
-  const router = useRouter();
-  const { data: session } = useSession();
-  console.log(session?.user, "session");
-
   const handleLogin = async () => {
     await signIn("google");
-    // router.push("/");
   };
   return (
     <div className={styles.pageContainer}>
       <header className={styles.headerContainer}>
-        <img src="../favicon.ico" alt="logo" />
+        <Image src={logo} alt="logo" width={300} height={100} />
         <h1 className={styles.title}>Daily Expenses</h1>
       </header>
       <p className={styles.subTitle}>Track and analyze your expense today!</p>
@@ -35,9 +35,13 @@ function Auth() {
         expenses nad provides tools for analyzing and categorizing this
         information to help you better understand your spending limit{" "}
       </p>
-      <div className="g-signin2" data-onsuccess="onSignIn">
-        <button onClick={handleLogin}>Login to Continue</button>
+      <div className={styles.buttonContainer} data-onsuccess="onSignIn">
+        <span>{GoogleLogo()}</span>
+        <button className={styles.loginBtn} onClick={handleLogin}>
+          Login to Continue
+        </button>
       </div>
+      <Image src={moneyImage} alt="moneyimage" width={500} height={500} />
     </div>
   );
 }
