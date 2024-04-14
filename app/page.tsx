@@ -18,7 +18,7 @@ const styles = {
   expensePrice: "text-6xl",
   expenseFooterContainer: "fixed bottom-0 border-t px-4 py-6 w-1/2",
   expenseFooterWrapper: "flex justify-around w-full ",
-  btnStyle: "flex flex-col items-center",
+  btnStyle: "flex flex-col items-center text-gray-500 text-sm",
   addIcon: "bg-yellow-200 rounded-full p-2",
   navTitle: "font-bold",
 };
@@ -34,7 +34,7 @@ export default function Home() {
       <div className={styles.expenseDescriptionContainer}>
         <div className={styles.expenseDescriptionWrapper}>
           <p className={styles.expenseTitle}>Spent this month</p>
-          <div className="text-red-600  flex gap-1">
+          <div className="text-red-600  flex">
             <span className="text-4xl">$ -</span>{" "}
             <span className="text-6xl">20</span>{" "}
             <span className="text-4xl">.00</span>
