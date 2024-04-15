@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import { signOut } from "next-auth/react";
 import {
   Moon,
@@ -7,6 +8,7 @@ import {
   ChangeLogIcon,
   AnalyticIcon,
 } from "@/components/svg";
+import AddExpenseModal from "@/components/AddExpenseModal";
 
 const styles = {
   container: "bg-white w-1/2 relative",
@@ -21,9 +23,18 @@ const styles = {
   btnStyle: "flex flex-col items-center text-gray-500 text-sm",
   addIcon: "bg-yellow-200 rounded-full p-2",
   navTitle: "font-bold",
+  expenseDisplayContainer: "text-red-600 flex",
+  dollarSignText: "text-4xl",
+  dollarAmountText: "text-6xl",
+  decimalAmountText: "text-4xl",
 };
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpenAddExpenseModal = (): void => {
+    setIsOpen(true);
+  };
+
   return (
     <div className={styles.container}>
       <nav className={styles.nav}>
@@ -34,13 +45,14 @@ export default function Home() {
       <div className={styles.expenseDescriptionContainer}>
         <div className={styles.expenseDescriptionWrapper}>
           <p className={styles.expenseTitle}>Spent this month</p>
-          <div className="text-red-600  flex">
-            <span className="text-4xl">$ -</span>{" "}
-            <span className="text-6xl">20</span>{" "}
-            <span className="text-4xl">.00</span>
+          <div className={styles.expenseDisplayContainer}>
+            <span className={styles.dollarSignText}>$ -</span>{" "}
+            <span className={styles.dollarAmountText}>20</span>{" "}
+            <span className={styles.decimalAmountText}>.00</span>
           </div>
         </div>
       </div>
+
       <div className={styles.expenseFooterContainer}>
         <div className={styles.expenseFooterWrapper}>
           <button className={styles.btnStyle}>
@@ -48,13 +60,19 @@ export default function Home() {
             Analytic
           </button>
 
-          <button className={styles.addIcon}>{AddIcon()}</button>
+          <button
+            onClick={handleOpenAddExpenseModal}
+            className={styles.addIcon}
+          >
+            {AddIcon()}
+          </button>
           <button className={styles.btnStyle}>
             <p>{ChangeLogIcon()}</p>
             Change logs
           </button>
         </div>
       </div>
+      <AddExpenseModal />
     </div>
   );
 }
