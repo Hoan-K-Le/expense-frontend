@@ -10,6 +10,7 @@ import { ArrowDownOnModalIcon, TagIcon } from "@/components/svg";
 import ConfirmationModal from "@/components/ConfirmationModal";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/store";
+import SelectTagModal from "@/components/SelectTagModal";
 
 function AddExpenseModal({
   setIsOpen,
@@ -17,6 +18,7 @@ function AddExpenseModal({
   setIsOpen: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const [isConfirmationOpen, setIsConformationOpen] = useState(false);
+  const [isSelectedTagModalOpen, setIsSelectedTagModalOpen] = useState(true);
   const [expense, setExpense] = useState({
     price: "",
     tag: "",
@@ -42,6 +44,9 @@ function AddExpenseModal({
   const handleForm = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
   };
+  const handleOpenTagModal = () => {
+    setIsSelectedTagModalOpen(true);
+  };
   return (
     <motion.div
       initial={{ y: 1000 }}
@@ -64,7 +69,10 @@ function AddExpenseModal({
             className="text-center outline-none text-5xl border-b-2 border-gray-200 bg-transparent w-[200px] pb-2"
           />
           <p className="mt-4">{ArrowDownOnModalIcon()}</p>
-          <button className="flex items-center gap-2 text-gray-500 text-lg hover:scale-110 mb-4 transition-all">
+          <button
+            onClick={handleOpenTagModal}
+            className="flex items-center gap-2 text-gray-500 text-lg hover:scale-110 mb-4 transition-all"
+          >
             {TagIcon()} Select your tag
           </button>
           <div className="flex justify-around w-full items-center gap-2 relative ">
@@ -90,6 +98,7 @@ function AddExpenseModal({
           setIsOpen={setIsOpen}
         />
       )}
+      {isSelectedTagModalOpen && <SelectTagModal />}
     </motion.div>
   );
 }
