@@ -9,16 +9,16 @@ import {
   AnalyticIcon,
 } from "@/components/svg";
 import AddExpenseModal from "@/components/AddExpenseModal";
-
+import { useAppSelector } from "@/store";
 const styles = {
-  container: "bg-white w-1/2 relative",
-  nav: "flex justify-between p-8 items-center",
+  container: "bg-white w-1/2 relative flex flex-col",
+  nav: "flex justify-between items-center px-4 py-2",
   expenseDescriptionContainer:
-    "flex flex-col items-center justify-center min-h-screen",
-  expenseDescriptionWrapper: "h-[52vh] flex flex-col items-center",
-  expenseTitle: "text-gray-500 text-md  mb-8",
+    "flex flex-col gap-20 justify-center min-h-screen",
+  expenseDescriptionWrapper: "flex flex-col items-center",
+  expenseTitle: "text-gray-500 text-md ",
   expensePrice: "text-6xl",
-  expenseFooterContainer: "fixed bottom-0 border-t px-4 py-6 w-1/2",
+  expenseFooterContainer: "fixed bottom-0 border-t p-4 w-1/2 z-2 bg-white",
   expenseFooterWrapper: "flex justify-around w-full ",
   btnStyle: "flex flex-col items-center text-gray-500 text-sm",
   addIcon: "bg-yellow-200 rounded-full p-2",
@@ -34,6 +34,20 @@ export default function Home() {
   const handleOpenAddExpenseModal = (): void => {
     setIsOpen(true);
   };
+  const expense = useAppSelector(state => state.expense.expense);
+
+  const expenseTotal = useAppSelector(state => state.expense.total);
+
+  const expenseTextDisplay = (expense: string) => {
+    const expenseSplit = expense.split(".");
+    return (
+      <div className={styles.expenseDisplayContainer}>
+        <span className={styles.dollarSignText}>$ -</span>
+        <span className={styles.dollarAmountText}>{expenseSplit[0]}</span>
+        <span className={styles.decimalAmountText}>.{expenseSplit[1]}</span>
+      </div>
+    );
+  };
 
   return (
     <div className={styles.container}>
@@ -45,14 +59,21 @@ export default function Home() {
       <div className={styles.expenseDescriptionContainer}>
         <div className={styles.expenseDescriptionWrapper}>
           <p className={styles.expenseTitle}>Spent this month</p>
-          <div className={styles.expenseDisplayContainer}>
-            <span className={styles.dollarSignText}>$ -</span>{" "}
-            <span className={styles.dollarAmountText}>20</span>{" "}
-            <span className={styles.decimalAmountText}>.00</span>
-          </div>
+          {expenseTotal && expenseTextDisplay(expenseTotal)}
+        </div>
+        <div className="flex flex-col">
+          {expense &&
+            expense.map((ex, i) => (
+              <div
+                className="flex justify-between items-center p-4"
+                key={`${i}${ex.price}`}
+              >
+                <p>tag</p>
+                <p className="text-red-400">- {ex.price}$</p>
+              </div>
+            ))}
         </div>
       </div>
-
       <div className={styles.expenseFooterContainer}>
         <div className={styles.expenseFooterWrapper}>
           <button className={styles.btnStyle}>
@@ -72,7 +93,7 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <AddExpenseModal />
+      {isOpen && <AddExpenseModal setIsOpen={setIsOpen} />}
     </div>
   );
 }

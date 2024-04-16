@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { NextAuthProvider } from "./NextAuthProvider";
 import AuthProvider from "@/components/AuthProvider";
+import { ReduxProvider } from "@/store/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,12 +21,14 @@ export default function RootLayout({
   return (
     <html lang="en">
 
-      <body className={`${inter.className} bg-neutral-content min-h-[100vh] flex justify-center`}>
-        <NextAuthProvider>
-      <AuthProvider>
-        {children}
-      </AuthProvider>
-        </NextAuthProvider>
+      <body className={`${inter.className} bg-neutral-content flex justify-center`}>
+        <ReduxProvider>
+         <NextAuthProvider>
+           <AuthProvider>
+             {children}
+            </AuthProvider>
+         </NextAuthProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

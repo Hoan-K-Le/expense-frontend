@@ -29,7 +29,7 @@ export const GoogleLogo = () => {
 export const Moon = () => {
   return (
     <svg
-      enable-background="new 0 0 512 512"
+      enableBackground="new 0 0 512 512"
       viewBox="0 0 512 512"
       height="1em"
       width="1em"
@@ -49,7 +49,7 @@ export const LogOutIcon = () => {
     <svg
       stroke="currentColor"
       fill="none"
-      stroke-width="1.5"
+      strokeWidth="1.5"
       viewBox="0 0 24 24"
       aria-hidden="true"
       className="h-5 w-5 hover:scale-110 transition-all"
@@ -58,8 +58,8 @@ export const LogOutIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
       ></path>
     </svg>
@@ -71,7 +71,7 @@ export const AddIcon = () => {
     <svg
       stroke="currentColor"
       fill="none"
-      stroke-width="1.5"
+      strokeWidth="1.5"
       viewBox="0 0 24 24"
       aria-hidden="true"
       className="h-8 w-8 hover:scale-125 transition-all "
@@ -80,8 +80,8 @@ export const AddIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="M12 4.5v15m7.5-7.5h-15"
       ></path>
     </svg>
@@ -93,7 +93,7 @@ export const ChangeLogIcon = () => {
     <svg
       stroke="currentColor"
       fill="none"
-      stroke-width="1.5"
+      strokeWidth="1.5"
       viewBox="0 0 24 24"
       aria-hidden="true"
       className="h-6 w-6 hover:scale-125 transition-all"
@@ -102,8 +102,8 @@ export const ChangeLogIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46"
       ></path>
     </svg>
@@ -115,7 +115,7 @@ export const AnalyticIcon = () => {
     <svg
       stroke="currentColor"
       fill="none"
-      stroke-width="1.5"
+      strokeWidth="1.5"
       viewBox="0 0 24 24"
       aria-hidden="true"
       className="h-6 w-6 hover:scale-125 transition-all "
@@ -124,13 +124,13 @@ export const AnalyticIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"
       ></path>
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"
       ></path>
     </svg>
@@ -142,7 +142,7 @@ export const ArrowDownOnModalIcon = () => {
     <svg
       stroke="currentColor"
       fill="currentColor"
-      stroke-width="0"
+      strokeWidth="0"
       viewBox="0 0 16 16"
       className="w-6 h-6 text-gray-400"
       height="1em"
@@ -150,7 +150,7 @@ export const ArrowDownOnModalIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
       ></path>
     </svg>
@@ -162,7 +162,7 @@ export const TagIcon = () => {
     <svg
       stroke="currentColor"
       fill="currentColor"
-      stroke-width="0"
+      strokeWidth="0"
       viewBox="0 0 16 16"
       height="1em"
       width="1em"
@@ -170,6 +170,48 @@ export const TagIcon = () => {
     >
       <path d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"></path>
       <path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"></path>
+    </svg>
+  );
+};
+
+export const LockIcon = () => {
+  return (
+    <svg
+      stroke="currentColor"
+      fill="currentColor"
+      strokeWidth="0"
+      viewBox="0 0 20 20"
+      height="1em"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+        clipRule="evenodd"
+      ></path>
+    </svg>
+  );
+};
+
+export const ArrowRightIcon = () => {
+  return (
+    <svg
+      stroke="currentColor"
+      fill="none"
+      strokeWidth="1.5"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className="w-8 h-8"
+      height="1em"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+      ></path>
     </svg>
   );
 };
