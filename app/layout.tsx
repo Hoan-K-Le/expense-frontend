@@ -4,7 +4,8 @@ import "./globals.css";
 import { NextAuthProvider } from "./NextAuthProvider";
 import AuthProvider from "@/components/AuthProvider";
 import { ReduxProvider } from "@/store/provider";
-
+import { ToastContainer, Slide } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -27,9 +28,27 @@ export default function RootLayout({
            <AuthProvider>
              {children}
             </AuthProvider>
+            <ToastContainerWrapper/>
          </NextAuthProvider>
         </ReduxProvider>
       </body>
     </html>
   );
+}
+function ToastContainerWrapper () {
+  return (
+    <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+//  transition: Bounce,
+/>
+  )
 }

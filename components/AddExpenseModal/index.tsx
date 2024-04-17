@@ -8,9 +8,10 @@ import React, {
 import { motion } from "framer-motion";
 import { ArrowDownOnModalIcon, TagIcon } from "@/components/svg";
 import ConfirmationModal from "@/components/ConfirmationModal";
-import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/store";
 import SelectTagModal from "@/components/SelectTagModal";
+import { toast } from "react-toastify";
+import { useRef } from "react";
 
 function AddExpenseModal({
   setIsOpen,
@@ -18,13 +19,14 @@ function AddExpenseModal({
   setIsOpen: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const [isConfirmationOpen, setIsConformationOpen] = useState(false);
-  const [isSelectedTagModalOpen, setIsSelectedTagModalOpen] = useState(true);
+  const [isSelectedTagModalOpen, setIsSelectedTagModalOpen] = useState(false);
   const [expense, setExpense] = useState({
     price: "",
     tag: "",
     date: "",
   });
-
+  const confirmRef = useRef<HTMLDivElement>(null);
+  const selectTagModalRef = useRef<HTMLDivElement>(null);
   const userExpenses = useAppSelector(state => state.expense);
   const date = new Date()
     .toString()
@@ -34,6 +36,10 @@ function AddExpenseModal({
 
   console.log(userExpenses, "hello expenses");
   const handleConfirmationModal = () => {
+    if (expense.tag === "") {
+      toast.error("Please select a tag.");
+      return;
+    }
     setIsConformationOpen(true);
   };
 
@@ -47,6 +53,38 @@ function AddExpenseModal({
   const handleOpenTagModal = () => {
     setIsSelectedTagModalOpen(true);
   };
+  useEffect(() => {
+    function handleClickAway(event: MouseEvent) {
+      if (
+        confirmRef.current &&
+        !confirmRef.current.contains(event.target as Node)
+      ) {
+        setIsConformationOpen(false); // Close the modal if clicking outside of it
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickAway);
+    return () => {
+      document.removeEventListener("mousedown", handleClickAway);
+    };
+  }, []);
+
+  useEffect(() => {
+    function handleClickTagModalAway(event: MouseEvent) {
+      if (
+        selectTagModalRef.current &&
+        !selectTagModalRef.current.contains(event.target as Node)
+      ) {
+        setIsSelectedTagModalOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickTagModalAway);
+    return () => {
+      document.removeEventListener("mousedown", handleClickTagModalAway);
+    };
+  }, []);
+
   return (
     <motion.div
       initial={{ y: 1000 }}
@@ -96,9 +134,12 @@ function AddExpenseModal({
           setIsConformationOpen={setIsConformationOpen}
           expense={expense}
           setIsOpen={setIsOpen}
+          confirmRef={confirmRef}
         />
       )}
-      {isSelectedTagModalOpen && <SelectTagModal />}
+      {isSelectedTagModalOpen && (
+        <SelectTagModal selectTagModalRef={selectTagModalRef} />
+      )}
     </motion.div>
   );
 }

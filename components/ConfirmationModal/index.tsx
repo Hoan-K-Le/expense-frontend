@@ -9,11 +9,13 @@ interface ConfirmationModalProps {
   setIsConformationOpen: React.Dispatch<React.SetStateAction<boolean>>;
   expense: ExpenseProp;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  confirmRef: any;
 }
 function ConfirmationModal({
   setIsConformationOpen,
   expense,
   setIsOpen,
+  confirmRef,
 }: ConfirmationModalProps) {
   const dispatch = useDispatch();
   const handleCancelConformation = () => {
@@ -36,7 +38,10 @@ function ConfirmationModal({
   };
 
   return (
-    <div className=" border-2 h-screen top-0 fixed w-full  opacity-95 backdrop-blur-sm z-50">
+    <div
+      ref={confirmRef}
+      className=" border-2 h-screen top-0 fixed w-full  opacity-95 backdrop-blur-sm z-50"
+    >
       <motion.div
         initial={{ y: 1000 }}
         animate={{ y: 20 }}
@@ -52,9 +57,9 @@ function ConfirmationModal({
           </p>
         </div>
         <div className=" flex items-center gap-2 justify-evenly h-[25vh] text-2xl">
-          <span>$43</span>
+          <span>{expense.price}</span>
           <span>{ArrowRightIcon()}</span>
-          <span>Rent</span>
+          <span>{expense.tag}</span>
         </div>
         <div className="flex items-center gap-4">
           <button
