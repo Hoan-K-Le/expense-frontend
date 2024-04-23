@@ -31,6 +31,7 @@ function ConfirmationModal({
         .slice(0, 4)
         .join(" "),
       tag: expense.tag,
+      sticker: expense.sticker,
     };
     dispatch(addExpense(newExpense));
     setIsConformationOpen(false);

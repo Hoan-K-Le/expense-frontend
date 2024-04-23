@@ -20,9 +20,10 @@ function AddExpenseModal({
 }) {
   const [isConfirmationOpen, setIsConformationOpen] = useState(false);
   const [isSelectedTagModalOpen, setIsSelectedTagModalOpen] = useState(false);
-  const [expense, setExpense] = useState({
+  const [expense, setExpense] = useState<any>({
     price: "",
     tag: "",
+    sticker: "",
     date: "",
   });
   const confirmRef = useRef<HTMLDivElement>(null);
@@ -34,7 +35,6 @@ function AddExpenseModal({
     .slice(0, 4)
     .join(" ");
 
-  console.log(userExpenses, "hello expenses");
   const handleConfirmationModal = () => {
     if (expense.tag === "") {
       toast.error("Please select a tag.");
@@ -44,7 +44,7 @@ function AddExpenseModal({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setExpense(prev => ({ ...prev, price: e.target.value }));
+    setExpense((prev: any) => ({ ...prev, price: e.target.value }));
   };
 
   const handleForm = (e: FormEvent<HTMLFormElement>): void => {
@@ -107,6 +107,11 @@ function AddExpenseModal({
             className="text-center outline-none text-5xl border-b-2 border-gray-200 bg-transparent w-[200px] pb-2"
           />
           <p className="mt-4">{ArrowDownOnModalIcon()}</p>
+          <div className="flex items-center gap-2">
+            <p>{expense.sticker || ""}</p>
+            <p>{expense.tag || ""}</p>
+          </div>
+
           <button
             onClick={handleOpenTagModal}
             className="flex items-center gap-2 text-gray-500 text-lg hover:scale-110 mb-4 transition-all"
@@ -138,7 +143,11 @@ function AddExpenseModal({
         />
       )}
       {isSelectedTagModalOpen && (
-        <SelectTagModal selectTagModalRef={selectTagModalRef} />
+        <SelectTagModal
+          selectTagModalRef={selectTagModalRef}
+          setExpense={setExpense}
+          setIsSelectedTagModalOpen={setIsSelectedTagModalOpen}
+        />
       )}
     </motion.div>
   );

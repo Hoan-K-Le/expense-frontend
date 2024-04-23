@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { AddIcon, LeftArrow } from "@/components/svg";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/store";
 import { addTags } from "@/store/expenseReducer";
 
-function SelectTagModal({ selectTagModalRef }: { selectTagModalRef: any }) {
+function SelectTagModal({
+  selectTagModalRef,
+  setExpense,
+  setIsSelectedTagModalOpen,
+}: {
+  selectTagModalRef: any;
+  setExpense: any;
+  setIsSelectedTagModalOpen: any;
+}) {
   const [selectedTagInputModal, setSelectedTagInputModal] = useState(false);
   const [tagInput, setTagInput] = useState({ sticker: "", tagName: "" });
+  const [test, setTest] = useState<any>();
   const dispatch = useDispatch();
   const tags = useAppSelector(state => state.expense.listOfTags);
 
@@ -26,6 +35,20 @@ function SelectTagModal({ selectTagModalRef }: { selectTagModalRef: any }) {
     setSelectedTagInputModal(false);
   };
 
+  useEffect(() => {
+    if (test) {
+      setExpense((prev: any) => ({
+        ...prev,
+        tag: test.tag,
+        sticker: test.sticker,
+      }));
+
+      setTimeout(() => {
+        setIsSelectedTagModalOpen(false);
+      }, 100);
+    }
+  }, [test]);
+
   return (
     <>
       <div
@@ -39,16 +62,22 @@ function SelectTagModal({ selectTagModalRef }: { selectTagModalRef: any }) {
           className=" p-3 border-t-2 rounded-xl h-[55vh] bg-white w-full fixed -bottom-10 backdrop-blur-sm "
         >
           <p className="text-4xl font-bold mb-4 text-center">Expenses</p>
-          <div className=" flex items-center flex-wrap justify-around gap-5">
+          <div className=" flex  flex-wrap  gap-5">
             <button
               onClick={() => setSelectedTagInputModal(true)}
               className="p-2 rounded-full border text-md text-gray-200"
             >
               {AddIcon()}
             </button>
+
             {tags &&
               tags.map((t: any) => (
-                <div className="flex flex-col items-center">
+                <div
+                  onClick={e => {
+                    setTest(t);
+                  }}
+                  className="flex flex-col items-center cursor-pointer"
+                >
                   <p>{t.sticker}</p>
                   <p>{t.tag}</p>
                 </div>

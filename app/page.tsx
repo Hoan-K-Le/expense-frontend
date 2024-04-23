@@ -71,7 +71,10 @@ export default function Home() {
                 className="flex justify-between items-center p-4"
                 key={`${i}${ex.price}`}
               >
-                <p>tag</p>
+                <div className="flex gap-1 items-center">
+                  <p>{ex.tag}</p>
+                  <p>{ex.sticker}</p>
+                </div>
                 <p className="text-red-400">- {ex.price}$</p>
               </div>
             ))}

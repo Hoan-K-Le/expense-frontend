@@ -5,6 +5,7 @@ export interface ExpenseProp {
   price: string;
   date: string;
   tag: string;
+  sticker: string;
 }
 interface ExpenseState {
   expense: ExpenseProp[];
