@@ -29,6 +29,7 @@ function AddExpenseModal({
   const confirmRef = useRef<HTMLDivElement>(null);
   const selectTagModalRef = useRef<HTMLDivElement>(null);
   const userExpenses = useAppSelector(state => state.expense);
+  const { darkMode } = useAppSelector(state => state.darkMode);
   const date = new Date()
     .toString()
     .split(" ")
@@ -90,7 +91,9 @@ function AddExpenseModal({
       initial={{ y: 1000 }}
       animate={{ y: -20 }}
       transition={{ duration: 0.2 }}
-      className=" absolute top-0 bg-white opacity-95 backdrop-blur-sm w-full flex items-center justify-center h-screen overflow-hidden flex-col"
+      className={` absolute top-0 ${
+        darkMode ? "bg-base-content" : "bg-white"
+      } opacity-95 backdrop-blur-sm w-full flex items-center justify-center h-screen overflow-hidden flex-col`}
     >
       <div className="flex flex-col items-center justify-center gap-4 ">
         <p className="text-gray-400  text-sm text-center">Today at {date}</p>

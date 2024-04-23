@@ -6,6 +6,7 @@ import AuthProvider from "@/components/AuthProvider";
 import { ReduxProvider } from "@/store/provider";
 import { ToastContainer, Slide } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useAppSelector } from "@/store";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,10 +20,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-
-      <body className={`${inter.className} bg-neutral-content flex justify-center`}>
+      <body className={`${inter.className} `}>
         <ReduxProvider>
          <NextAuthProvider>
            <AuthProvider>

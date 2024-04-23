@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ExpenseProp } from "@/store/expenseReducer";
 import { addExpense } from "@/store/expenseReducer";
 import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/store";
 
 interface ConfirmationModalProps {
   setIsConformationOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,7 +22,7 @@ function ConfirmationModal({
   const handleCancelConformation = () => {
     setIsConformationOpen(false);
   };
-
+  const { darkMode } = useAppSelector(state => state.darkMode);
   const handleCreateNewExpense = () => {
     const newExpense = {
       price: expense.price,
@@ -47,7 +48,9 @@ function ConfirmationModal({
         initial={{ y: 1000 }}
         animate={{ y: 20 }}
         transition={{ duration: 0.2 }}
-        className=" p-3 border-t-2 rounded-xl h-[55vh] bg-white fixed -bottom-10 backdrop-blur-sm "
+        className={` p-3 border-t-2 rounded-xl h-[55vh] ${
+          darkMode ? "bg-base-content" : "bg-white"
+        } fixed -bottom-10 backdrop-blur-sm `}
       >
         <p className="text-4xl font-bold mb-4">Confirm</p>
         <div className="flex items-center gap-3">

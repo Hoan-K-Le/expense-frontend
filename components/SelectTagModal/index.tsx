@@ -19,7 +19,7 @@ function SelectTagModal({
   const [test, setTest] = useState<any>();
   const dispatch = useDispatch();
   const tags = useAppSelector(state => state.expense.listOfTags);
-
+  const { darkMode } = useAppSelector(state => state.darkMode);
   const handleTagInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setTagInput(prev => ({ ...prev, [name]: value }));
@@ -53,13 +53,15 @@ function SelectTagModal({
     <>
       <div
         ref={selectedTagInputModal ? null : selectTagModalRef}
-        className=" border-t-2 h-screen top-0 fixed w-full opacity-95 backdrop-blur-sm z-50 py-2"
+        className={` border-t-2 h-screen top-0 fixed w-full opacity-95 backdrop-blur-sm z-50 py-2`}
       >
         <motion.div
           initial={{ y: 1000 }}
           animate={{ y: 20 }}
           transition={{ duration: 0.2 }}
-          className=" p-3 border-t-2 rounded-xl h-[55vh] bg-white w-full fixed -bottom-10 backdrop-blur-sm "
+          className={` p-3 border-t-2 rounded-xl h-[55vh] ${
+            darkMode ? "bg-base-content" : "bg-white"
+          } w-full fixed -bottom-10 backdrop-blur-sm `}
         >
           <p className="text-4xl font-bold mb-4 text-center">Expenses</p>
           <div className=" flex  flex-wrap  gap-5">
@@ -91,7 +93,9 @@ function SelectTagModal({
             initial={{ x: -1000 }}
             animate={{ x: 0 }}
             transition={{ duration: 0.3 }}
-            className=" p-3 border-t-2 rounded-xl h-[60vh] bg-white w-full fixed -bottom-10 backdrop-blur-sm "
+            className={` p-3 border-t-2 rounded-xl h-[60vh] ${
+              darkMode ? "bg-base-content text-black" : "bg-white"
+            } w-full fixed -bottom-10 backdrop-blur-sm `}
           >
             <button
               onClick={() => setSelectedTagInputModal(false)}

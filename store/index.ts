@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useSelector, TypedUseSelectorHook } from "react-redux";
 import expenseReducer from "./expenseReducer";
+import darkModeReducer from "./darkModeReducer";
 
 export const store = configureStore({
   reducer: {
     expense: expenseReducer,
+    darkMode: darkModeReducer,
   },
 });
 
