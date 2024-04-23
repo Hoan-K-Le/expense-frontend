@@ -10,6 +10,7 @@ import {
 } from "@/components/svg";
 import AddExpenseModal from "@/components/AddExpenseModal";
 import { useAppSelector } from "@/store";
+import Link from "next/link";
 const styles = {
   container: "bg-white relative flex flex-col min-w-[400px] ",
   nav: "flex justify-between items-center px-4 py-2",
@@ -35,8 +36,24 @@ export default function Home() {
     setIsOpen(true);
   };
   const expense = useAppSelector(state => state.expense.expense);
-
   const expenseTotal = useAppSelector(state => state.expense.total);
+  const todaysDate = new Date()
+    .toString()
+    .split(" ")
+    .slice(0, 4)
+    .join(" ");
+  const groupByDate = (expenses: any) => {
+    return expenses.reduce((group: any, expense: any) => {
+      const date = expense.date;
+      if (!group[date]) {
+        group[date] = [];
+      }
+      group[date].push(expense);
+      return group;
+    }, {});
+  };
+
+  const expensesByDate = groupByDate(expense);
 
   const expenseTextDisplay = (expense: string) => {
     if (expense.length === 0) {
@@ -60,33 +77,31 @@ export default function Home() {
         <button onClick={() => signOut()}>{LogOutIcon()}</button>
       </nav>
       <div className={styles.expenseDescriptionContainer}>
-        <div className={styles.expenseDescriptionWrapper}>
-          <p className={styles.expenseTitle}>Spent this month</p>
-          {expenseTotal && expenseTextDisplay(expenseTotal)}
-        </div>
-        <div className="flex flex-col">
-          {expense &&
-            expense.map((ex, i) => (
+        {Object.keys(expensesByDate).map(date => (
+          <div key={date} className={styles.expenseDescriptionWrapper}>
+            <p className={styles.expenseTitle}>Spent on {date}</p>
+            {expensesByDate[date].map((expense: any, index: any) => (
               <div
-                className="flex justify-between items-center p-4"
-                key={`${i}${ex.price}`}
+                className="flex justify-between items-center p-4 gap-4"
+                key={index}
               >
-                <div className="flex gap-1 items-center">
-                  <p>{ex.tag}</p>
-                  <p>{ex.sticker}</p>
+                <div className="flex gap-2 items-center">
+                  <p>{expense.tag}</p>
+                  <p>{expense.sticker}</p>
                 </div>
-                <p className="text-red-400">- {ex.price}$</p>
+                <p>&rarr;</p>
+                <p className="text-red-400">- {expense.price}$</p>
               </div>
             ))}
-        </div>
+          </div>
+        ))}
       </div>
       <div className={styles.expenseFooterContainer}>
         <div className={styles.expenseFooterWrapper}>
-          <button className={styles.btnStyle}>
-            <p>{AnalyticIcon()}</p>
-            Analytic
-          </button>
-
+          <Link href={"/analytics"} className={styles.btnStyle}>
+            {AnalyticIcon()}
+            <p>Analytic</p>
+          </Link>
           <button
             onClick={handleOpenAddExpenseModal}
             className={styles.addIcon}
@@ -94,8 +109,8 @@ export default function Home() {
             {AddIcon()}
           </button>
           <button className={styles.btnStyle}>
-            <p>{ChangeLogIcon()}</p>
-            Change logs
+            {ChangeLogIcon()}
+            <p>Change logs</p>
           </button>
         </div>
       </div>
