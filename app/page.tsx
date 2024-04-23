@@ -16,7 +16,7 @@ const styles = {
   nav: "flex justify-between items-center px-4 py-2",
   expenseDescriptionContainer:
     "flex flex-col gap-20 justify-center min-h-screen",
-  expenseDescriptionWrapper: "flex flex-col items-center",
+  expenseDescriptionWrapper: "flex flex-col px-4",
   expenseTitle: "text-gray-500 text-md ",
   expensePrice: "text-6xl",
   expenseFooterContainer: "sticky bottom-0  border-t p-4 w-full z-2 bg-white",
@@ -24,7 +24,8 @@ const styles = {
   btnStyle: "flex flex-col items-center text-gray-500 text-sm",
   addIcon: "bg-yellow-200 rounded-full p-2",
   navTitle: "font-bold",
-  expenseDisplayContainer: "text-red-600 flex",
+  expenseDisplayContainer:
+    "text-red-600 flex justify-center h-[30vh] items-end",
   dollarSignText: "text-4xl",
   dollarAmountText: "text-6xl",
   decimalAmountText: "text-4xl",
@@ -42,6 +43,7 @@ export default function Home() {
     .split(" ")
     .slice(0, 4)
     .join(" ");
+
   const groupByDate = (expenses: any) => {
     return expenses.reduce((group: any, expense: any) => {
       const date = expense.date;
@@ -77,12 +79,13 @@ export default function Home() {
         <button onClick={() => signOut()}>{LogOutIcon()}</button>
       </nav>
       <div className={styles.expenseDescriptionContainer}>
+        <p className="text-center w-full">{expenseTextDisplay(expenseTotal)}</p>
         {Object.keys(expensesByDate).map(date => (
           <div key={date} className={styles.expenseDescriptionWrapper}>
             <p className={styles.expenseTitle}>Spent on {date}</p>
             {expensesByDate[date].map((expense: any, index: any) => (
               <div
-                className="flex justify-between items-center p-4 gap-4"
+                className="flex justify-between items-center py-2 "
                 key={index}
               >
                 <div className="flex gap-2 items-center">
