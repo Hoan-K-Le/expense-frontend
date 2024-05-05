@@ -55,7 +55,6 @@ export default function Home() {
   };
 
   const expensesByDate = groupByDate(expense);
-  console.log(darkMode, "hello dark");
   const expenseTextDisplay = (expense: string) => {
     if (expense.length === 0) {
       return;
