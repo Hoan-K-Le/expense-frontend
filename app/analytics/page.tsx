@@ -5,12 +5,26 @@ import Chart from "chart.js/auto";
 
 function Analytics() {
   const { darkMode } = useAppSelector(state => state.darkMode);
-  const expense = useAppSelector(state => state.expense.expense);
+  const expenses = useAppSelector(state => state.expense.expense);
   const styles = {
     container: " relative flex flex-col min-w-[400px] ",
   };
-  console.log(expense, "expense");
+  console.log(expenses, "expense");
 
+  // group the expense by date and display that date with total expense
+  const groupByDate = (expense: any) => {
+    return expense.reduce((group: any, exp: any) => {
+      const date = exp.date;
+      let price = exp.price;
+      if (!group[date]) {
+        group[date] = 0;
+      }
+      group[date] += Number(price);
+      return group;
+    }, {});
+  };
+  console.log(groupByDate(expenses));
+  const expenseChartData = groupByDate(expenses);
   useEffect(() => {
     let chartStatus = Chart.getChart("expense");
     if (chartStatus != undefined) {
@@ -19,11 +33,11 @@ function Analytics() {
     new Chart(document.getElementById("expense" as any) as any, {
       type: "bar",
       data: {
-        labels: expense.map((ex: any) => ex.date),
+        labels: Object.keys(expenseChartData),
         datasets: [
           {
             label: "Expenses",
-            data: expense.map((ex: any) => Number(ex.price)),
+            data: Object.values(expenseChartData),
           },
         ],
       },
